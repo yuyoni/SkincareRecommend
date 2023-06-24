@@ -5,7 +5,6 @@ from flask import Flask, request, render_template, redirect, url_for
 from myeasyocr import OCR
 from recommend import I_P, C_P, C_G, Custom_vec, Recommend_search
 
-
 import pandas as pd
 
 app = Flask(__name__)
