@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 결과 알려주기 및 제품 추천을 위한 종류 받기 </title>
+    <link rel="stylesheet" href="../static/css/index4_style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="memo-container">
+        <div class="memo"></div>
+    </div>
+    <a href="/" class="img-container">
+        <img class="img" src="../static/images/main_image.jpg" alt="no image">
+    </a>
+    <div class="main">
+        <h2>지금 사용하는 제품에는 {{ type }}이 주의해야할 성분 및 피부고민에 맞지않는 성분이 
+            {% if cnt > 0 %}
+                {{ cnt }}개 있습니다 
+            {% else %}
+                없습니다.
+            {% endif %}
+        </h2>
+        <p style="text-align:left">
+        <!-- 각 성분에 대한 설명 -->
+        {% if cnt > 0 %}
+            {% for i in range(cnt) %}
+                <p id="ingred_info">{{ result[i] }} {{ result_info[i] }}</p>
+            {% endfor %}
+        {% endif %}
+        </p>
+        <br><br>
+        <p> 선택한 피부 고민에 도움이 되는 성분 및 {{ type }}에 좋은 성분이 포함되어있는 제품 추천이 필요하다면 </p>
+
+        <button class="btn" onclick="getRecom()"> 제품 추천받으러가기</button>
+    </div>
+
+    <script>
+        let type = localStorage.getItem('type')
+
+        let concern_list = localStorage.getItem('concern_list');
+
+        console.log(concern_list[0]);
+
+        function getRecom() {
+            url = `/select?type=${type}&concern_list=${concern_list}`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

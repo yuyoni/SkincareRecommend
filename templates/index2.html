@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피부타입 자가진단</title>
+    <link rel="stylesheet" href="../static/css/index2_style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="memo-container">
+        <div class="memo"></div>
+    </div>
+    <a href="/" class="img-container">
+        <img class="img" src="../static/images/main_image.jpg" alt="no image">
+    </a>
+    <a data-transition="pop">
+            <div class="main">
+                <h1 class="title">피부타입 진단하기</h1><br>            
+                <h3 id="quest">1. 블랙헤드와 피지가 많은 편이다.</h3><br/><br/>
+                <div id="button">
+                    <button class="btn" style="margin: 10px;" onclick="incrementCount();nextQuest('yes')">Yes</button>
+                    <button class="btn" style="margin: 10px;" onclick="nextQuest('no')">No</button>
+                </div>
+                <div id="container"></div>
+
+                <br/><br/><br/>
+
+                <div class="bar-container">
+                    <progress id="progress" value="1" max="10"></progress><br>
+                    <a id="quest_num" style="color: rgb(16, 19, 22);">1/10</a>
+                </div>
+            </div>
+    </a>
+    <script>
+        let count = 0; // 전역변수 count를 초기값 0으로 설정
+        let type = "건성";
+        let num = 0;
+        let quest = ["2. 세안 후 당기는 느낌이 별로 없다.", "3. 건조한 날에도 유분 분비가 잘 된다.", 
+                    "4. 피부 갈라짐 보다 번들거림이 눈에 띈다.", "5. 하루라도 머리를 감지 않으면 기름이 진다.", "6. 유분 많은 제품보다 산뜻한 제품을 선호한다.",
+                    "7. 세안 후 3시간 정도 지나면 유분이 생긴다.", "8. 수정 메이크업을 자주 하는 편이다.", "9. 보습에 좋은 제품을 사용하면 트러블이 생긴다.", 
+                    "10. 모공이 도드라지게 잘 보이는 편이다."]
+
+        function incrementCount() { 
+          count++; // count 1 증가
+        }
+
+        function nextQuest(answer) {
+            document.getElementById("progress").value = num + 2;
+            if(answer === 'yes') {
+              count++; // 대답이 'yes'이면 count 1 증가
+            }
+            
+            if(num === 9) {
+                // 대답 다하면 결과 출력 페이지로 이동
+                let url = `/ques_concern?type=${type}`;
+                window.location.href = url;
+            } else {
+                document.getElementById("quest").innerHTML = quest[num];
+                num++;
+                document.getElementById("quest_num").innerHTML = `${num+1}/10`
+            }
+            if (count > 5) {
+                type = "지성";
+            }
+            localStorage.setItem('type', type);
+        }
+        
+      </script>
+</body>
+</html>

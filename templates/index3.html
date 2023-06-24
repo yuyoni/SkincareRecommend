@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 피부고민 설문 </title>
+    <link rel="stylesheet" href="../static/css/index3_style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="memo-container">
+        <div class="memo"></div>
+    </div>
+    <a href="/" class="img-container">
+        <img class="img" src="../static/images/main_image.jpg" alt="no image">
+    </a>
+    <div class="main">
+        <h1> 피부고민 선택하기 </h1><br/>
+        <form class="check" onsubmit="Submit(event)">
+            <input type="checkbox" id="trouble" name="trouble" value="트러블케어" class="checkbox-item"/>
+            <label for="trouble" class="label-item">트러블 케어</label>
+            <input type="checkbox" id="antiaging" name="antiaging" value="안티에이징" class="checkbox-item"/>
+            <label for="antiaging" class="label-item">안티에이징</label>
+            <input type="checkbox" id="blackhead" name="blackhead" value="블랙헤드개선" class="checkbox-item"/>
+            <label for="blackhead" class="label-item">블랙헤드 개선</label>
+            <br/>
+            <input type="checkbox" id="darkspot" name="darkspot" value="다크스팟개선" class="checkbox-item"/>
+            <label for="darkspot" class="label-item">다크스팟 개선</label>
+            <input type="checkbox" id="skintone" name="skintone" value="피부톤개선" class="checkbox-item"/>
+            <label for="skintone" class="label-item">피부 톤 개선</label>
+            <br/>
+            <input type="checkbox" id="water" name="water" value="수분공급" class="checkbox-item"/>
+            <label for="water" class="label-item">수분 공급</label>
+            <input type="checkbox" id="oil" name="oil" value="유분조절" class="checkbox-item"/>
+            <label for="oil" class="label-item">유분 조절</label>
+            <input type="checkbox" id="pore" name="pore" value="모공크기개선" class="checkbox-item"/>
+            <label for="pore" class="label-item">모공 크기 개선</label>
+            <br/>
+            <input type="checkbox" id="roughskin" name="roughskin" value="피부요철완화" class="checkbox-item"/>
+            <label for="roughskin" class="label-item">피부 요철 완화</label>
+            <input type="checkbox" id="soothing" name="soothing" value="피부진정" class="checkbox-item"/>
+            <label for="soothing" class="label-item">피부 진정</label>
+            <br/>
+            <button class="btn" type="submit"> 피부타입 결과 보러가기 </button>
+        </form>
+    </div>
+    <script>
+        let type = localStorage.getItem('type');
+
+        function Submit(event) {
+            event.preventDefault(); // 기본 제출 동작 막기
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const values = [];
+
+            checkboxes.forEach((checkbox) => {
+              values.push(checkbox.value);
+            });
+
+            console.log(values)
+            if (values.length == 0) {
+                alert("1개 이상 선택해주세요");
+                return false;
+            }
+            // json 문자열로 변환 후 JSON.parse로 배열로 변환해서 보낼지 그냥 보낼지..고민중,,
+            let concern_list = JSON.stringify(values);   //JavaScript 객체나 배열을 JSON 문자열로 변환
+            //let concern_list = values;
+            
+            const url = `/typeResult?type=${type}&concern_list=${concern_list}`;
+            window.location.href = url;
+            localStorage.setItem('concern_list', concern_list);
+          }
+    </script>
+</body>
+</html>

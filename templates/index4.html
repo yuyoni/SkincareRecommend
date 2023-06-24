@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피부타입 진단 결과</title>
+    <link rel="stylesheet" href="../static/css/index4_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="memo-container">
+        <div class="memo"></div>
+    </div>
+    <a href="/" class="img-container">
+        <img class="img" src="../static/images/main_image.jpg" alt="no image">
+    </a>
+    <div class="main">
+        <h2 id="ment1"></h2>
+        <h2 id="ment2"></h2>
+        <h3> 아래 예시와 같이 사용중인 제품의 전성분 표시 부분만 잘라서 업로드해주세요 </h3><br>
+        <div class="nav">
+            <img id="ex_img" src="https://mblogthumb-phinf.pstatic.net/20150622_243/sol_2love_1434968211939ny7g8_JPEG/1.jpg?type=w2" alt="Image">
+        </div>
+        <div class="section">
+            <div id="preview"></div>
+            <form class="form-signin" id="form" method=post enctype=multipart/form-data onchange="setThumbnail(event)">
+                <input type="file" name="file" class="form-control-file" id="inputfile">
+                <div class="btn-container">
+                    <button class="btn"> 성분 확인 </button>
+                </div>   
+            </form>
+        </div>
+    </div>
+
+    <div id="load">
+        <img src='../static/images/loading.gif' alt="loading">
+    </div>
+    <script>
+      $(document).ready(function() {
+        $('#load').hide(); // 로딩 스피너 숨김
+        $('form').submit(function() {
+            $('#main').hide(); // main 숨김
+            $('#nav').hide(); // nav 숨김
+            $('#section').hide(); // section 숨김
+            $('#load').show(); // 로딩 스피너 표시
+        });
+      });
+    </script>
+    <script>
+        let concern_list = localStorage.getItem('concern_list');
+        concern_list = JSON.parse(concern_list); // string을 배열로 변환
+        
+        let type = localStorage.getItem('type');
+        document.getElementById("ment1").innerHTML = `${type}타입이며 ${concern_list}이(가) 필요한 타입입니다.`;
+        document.getElementById("ment").innerHTML = `지금 ${type} 타입과 ${concern_list}에 맞는 화장품을 쓰고 있나요?`;
+
+        function setThumbnail(event) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              let img = document.createElement("img");
+              img.setAttribute("src", event.target.result);
+              img.setAttribute("style", "width: auto; height: 220px;");
+              document.querySelector("div#preview").appendChild(img);
+              $('#inputfile').hide(); // section 숨김
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>

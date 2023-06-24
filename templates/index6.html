@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 추천 제품 종류 고르고 추천리스트 받아오기 </title>
+    <link rel="stylesheet" href="../static/css/index4_style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="memo-container">
+        <div class="memo"></div>
+    </div>
+    <a href="/" class="img-container">
+        <img class="img" src="../static/images/main_image.jpg" alt="no image">
+    </a>
+    <div class="main">
+        <h2 class="title"> 원하는 제품의 종류를 선택해주세요 </h2>
+        <form id="frm" method=post enctype=multipart/form-data onsubmit="Submit(event)">
+            <select class="select" name="prod_type" id="prod_type">
+                <ul class="option_list">
+                    <option class="option" value="스킨/토너">스킨/토너</option>
+                    <option class="option" value="로션/에멀젼">로션/에멀젼</option>
+                    <option class="option" value="올인원">올인원</option>
+                    <option class="option" value="에센스/세럼">에센스/세럼</option>
+                    <option class="option" value="크림">크림</option>
+                    <option class="option" value="아이크림">아이크림</option>
+                    <option class="option" value="미스트/픽서">미스트/픽서</option>
+                    <option class="option" value="페이스오일">페이스오일</option>
+                </ul>
+            </select>
+            <button class="btn" type="submit"> 추천제품 보기 </button>
+        </form>
+        <p>
+            {% if prod_list %}
+                <br><tr>{{ prod_list }}</tr>
+            {% endif %}
+        </p>
+        <br><button class="btn" onclick="goBack()"> 다른 제품으로 다시보기 </button>
+        <button class="btn" onclick="goMain()"> 피부타입 테스트 다시하기 </button>
+    </div>
+    
+
+    <script>
+        let type = localStorage.getItem('type');
+        let concern_list = localStorage.getItem('concern_list');
+
+        function Submit(event) {
+            event.preventDefault();
+            console.log(concern_list);
+            let prod_type = document.querySelector('#prod_type').value;
+            console.log(prod_type);
+
+            localStorage.setItem('prod_type', prod_type);
+
+            const url = `/select?type=${type}&concern_list=${concern_list}&prod_type=${prod_type}`;
+            window.location.href = url;
+        }
+
+        function goBack() {
+            const url = `/typeResult?type=${type}&concern_list=${concern_list}`;
+            window.location.href = url;
+        }
+
+        function goMain() {
+            const url = `/main`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
