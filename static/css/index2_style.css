@@ -131,8 +131,8 @@ body {
 }
 #progress::-webkit-progress-value {
     border-radius:10px;
-    background: #445b9e;
-    background: -webkit-linear-gradient(to right, #6d7c8d, #1e2430);
-    background: linear-gradient(to right, #6d7c8d, #1e2430);
+    background: #449e52;
+    background: -webkit-linear-gradient(to right, #6d8d7f, #1e3024);
+    background: linear-gradient(to right, #6d8d7f, #1e3024);
 
 }

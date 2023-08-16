@@ -133,7 +133,7 @@ body {
 }
 
 .checkbox-item:checked + .label-item {
-	background-color: rgba(61, 61, 61, 0.908);
+	background-color: rgba(68, 87, 72, 0.908);
     color: white;
 }
 
