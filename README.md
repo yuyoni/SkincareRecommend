@@ -30,7 +30,10 @@
 추천 제품 데이터는 올리브영 홈페이지의 스킨/케어 카테고리를 웹 크롤링하여 구축
 제품의 적절/부적절 판단과 추천제품 선정은 사용자의 피부타입과 피부고민에 맞는/맞지않는 성분을 찾아 제품의 전성분과 코사인 유사도를 계산하여 사용
 
-<br/><br/><br/>
+<br/><br/>
+
+## ** 구현 화면 **
+<br/>
 <img width="500" alt="1" src="https://github.com/yuyoni/SkincareRecommend/assets/127701092/a2419035-fec0-44ce-b7e5-ff0af11ccd98">
 <img width="500" alt="2" src="https://github.com/yuyoni/SkincareRecommend/assets/127701092/104f37af-1473-42e6-ad77-5b1664ceab21">
 <img width="500" alt="3" src="https://github.com/yuyoni/SkincareRecommend/assets/127701092/06209559-3411-4161-9dee-8fdca9ccafb7">
